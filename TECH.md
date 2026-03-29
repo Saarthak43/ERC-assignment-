@@ -17,3 +17,4 @@ the box)
 
 #### the total cost of this project would be INR 709.01 +  the cost of jumper wires and connecting wires 
 
+<img width="1003" height="596" alt="Screenshot 2026-03-29 214644" src="https://github.com/user-attachments/assets/23a85a38-e101-408b-8c31-aac664c49494" />
