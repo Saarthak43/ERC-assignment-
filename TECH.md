@@ -2,7 +2,7 @@
 
 ## QUESTION 1
 
-#### 1.ERC is planning to introduce a fun weekend project where participants build an
+1.ERC is planning to introduce a fun weekend project where participants build an
 interactive microcontroller-based gadget or game on their own. Think beyond basic
 circuits—this could be something like a Flappy Bird-style game, a reaction timer
 challenge, a memory game, or any engaging system using a microcontroller along with
@@ -12,14 +12,14 @@ within a budget of 1k per kit. (Don’t restrict yourself to the given example t
 the box)
 
 #### 
-## ANSWER1
+## ANSWER 1
 
 ### What is the game?
 WHACK-A-LED !!!
 #### it would be a fun interactive reaction based game -
 whack-a-LED is a reaction based game. six LEDs are placed on a breadboard, each with a button below it. a random LED lights up and you have to press the button below it as fast as you can. score a point for every correct hit, but lose a life if you press the wrong button or react too slowly. you get three lives, and the game gets faster with every point you score. your final score and best reaction time are shown on the LCD when the game ends.
 
-##BILL
+## BILL
 
 ### Sr Number || name of component || total units required || price 
 
@@ -294,3 +294,18 @@ The circuit is built around an Arduino Uno which acts as the brain of the entire
 ## How the code works 
 
 When the Arduino powers on it initialises the LCD, sets all LED pins as outputs and all button pins as inputs. The game then waits a random amount of time and lights up one randomly chosen LED. A timer starts the moment the LED turns on. The code then continuously checks all six buttons in a loop. If the player presses the button that matches the lit LED before the time window runs out, the code records the reaction time, plays a short high pitched beep, adds one point to the score and displays everything on the LCD. If the player presses the wrong button or does not press anything before the timer runs out, the code plays a low pitched fail sound and removes one life. After every correct hit the time window shrinks by 50 milliseconds making the game progressively faster. When all three lives are lost the game over sequence plays a descending tone, flashes all LEDs three times and displays the final score and best reaction time on the LCD. The player can then press any button to restart the game from the beginning.
+
+## QUESTION 2 
+
+2.You've seen robotic arms on factory floors — seamlessly grabbing, moving, and placing
+objects with surgical precision. Now it's your turn to build one. Model a pick-and-place
+robotic arm with a functioning conveyor belt and gripper in MATLAB Simscape
+Multibody. The arm must pick an object off the belt, move it, and place it — all
+simulated in 3D. The catch? You're getting a broken, unconnected Simscape model as
+your starting point. Blocks are there. Wires aren't. Parameters are wrong. Rotations are
+missing. You'll need to understand the kinematics, fix the connections, and get the
+whole thing running.
+
+## ANSWER 2
+
+
