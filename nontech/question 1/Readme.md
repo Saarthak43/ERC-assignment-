@@ -13,11 +13,4 @@ and something people would want to wear beyond the event.
 ![6fa41911-8c52-419c-b93b-1a23a7ea13dd](https://github.com/user-attachments/assets/72cca4ac-9292-4b18-947c-5daefe650163)
 ![1b6e62f6-c707-4c68-8cdc-24c7e36794d3](https://github.com/user-attachments/assets/becd6f34-f734-47e1-9cfb-8f3b3dd830ef)
 
-## QUESTION 2
-
-2.As a club, Posters are an integral part of how we make sure people attend our events. A
-poster is not just a colourful A4 sheet- its a scientifically designed sheet that convinces
-our audience that the event is worth attending at the same time not using much text.
-Design a poster for a workshop on Introduction to Swarm Robotics.
-
 
