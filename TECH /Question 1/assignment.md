@@ -295,36 +295,5 @@ The circuit is built around an Arduino Uno which acts as the brain of the entire
 
 When the Arduino powers on it initialises the LCD, sets all LED pins as outputs and all button pins as inputs. The game then waits a random amount of time and lights up one randomly chosen LED. A timer starts the moment the LED turns on. The code then continuously checks all six buttons in a loop. If the player presses the button that matches the lit LED before the time window runs out, the code records the reaction time, plays a short high pitched beep, adds one point to the score and displays everything on the LCD. If the player presses the wrong button or does not press anything before the timer runs out, the code plays a low pitched fail sound and removes one life. After every correct hit the time window shrinks by 50 milliseconds making the game progressively faster. When all three lives are lost the game over sequence plays a descending tone, flashes all LEDs three times and displays the final score and best reaction time on the LCD. The player can then press any button to restart the game from the beginning.
 
-## QUESTION 2 
-
-2.You've seen robotic arms on factory floors — seamlessly grabbing, moving, and placing
-objects with surgical precision. Now it's your turn to build one. Model a pick-and-place
-robotic arm with a functioning conveyor belt and gripper in MATLAB Simscape
-Multibody. The arm must pick an object off the belt, move it, and place it — all
-simulated in 3D. The catch? You're getting a broken, unconnected Simscape model as
-your starting point. Blocks are there. Wires aren't. Parameters are wrong. Rotations are
-missing. You'll need to understand the kinematics, fix the connections, and get the
-whole thing running.
-
-## ANSWER 2
-## QUESTION 3
-
-## ANSWER 3
-
-## QUESTION 4
-
-4.Did you know that even though most robotic legs rely on multiple actuators, it’s
-possible to achieve a walking motion using just a single rotating input? This is made
-possible by the Klann Mechanism, a clever linkage system that converts simple
-rotational motion into a leg-like walking movement. Your task is to model a walking leg
-using the Klann Mechanism in any CAD software of your choice. The goal is to
-accurately replicate the motion and understand how rotational input translates into
-locomotion.
-
-## ANSWER 4 
-
-https://a360.co/4c3G2hI
-
-
 
 
