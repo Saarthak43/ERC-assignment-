@@ -10,7 +10,7 @@ and something people would want to wear beyond the event.
 
 ## ANSWER 1
 
-![6fa41911-8c52-419c-b93b-1a23a7ea13dd](https://github.com/user-attachments/assets/72cca4ac-9292-4b18-947c-5daefe650163)
-![1b6e62f6-c707-4c68-8cdc-24c7e36794d3](https://github.com/user-attachments/assets/becd6f34-f734-47e1-9cfb-8f3b3dd830ef)
+I used https://gelato.com for my tshirt design editing tool.
+Used gemini and claude to give my design a final makeover 
 
-
+Starting with a rough sketch on a design sheet, drawing inspiration from last year's logo to maintain a thread of identity while making it our own. I then used Claude AI to translate that rough concept into a cartoonish illustrated style, adding circuit-themed details like resistors and traces woven into the design in place of ordinary decorative elements, giving it that perfect electronics-meets-creativity feel. The final design was brought to life using Gelato, and seeing people actually wear something that started as a pencil sketch on a sheet of paper was one of the most quietly satisfying moments of the entire event.
