@@ -46,6 +46,14 @@ data — stores the actual raw audio as a big list of numbers
 
 len(data) - The total number of samples in the entire audio file
 
+
+
+## What is stage 1 ?
+
+This stage is purely about inspection we're not fixing anything yet, just understanding what the corrupted audio looks like visually and mathematically.
+in this stage we are just diagonising the problem , first plotting the waveform wrt time domain , then wrt frequency using FFT calculations. 
+It did not look like normal audio. I then calculated the FFT and found a very high peak frequency abnormal for normal speech.
+
 ```cpp
 ##stage 1
 ## time axis
@@ -64,11 +72,12 @@ magnitude = np.abs(np.fft.rfft(data))
 ```
 
 
-## What is stage 1 ?
+## What is stage 2?
 
-This stage is purely about inspection we're not fixing anything yet, just understanding what the corrupted audio looks like visually and mathematically.
-in this stage we are just diagonising the problem , first plotting the waveform wrt time domain , then wrt frequency using FFT calculations. 
-It did not look like normal audio. I then calculated the FFT and found a very high peak frequency abnormal for normal speech.
+When I plotted the FFT in Stage 1, I could see that all the audio energy was sitting around 7300 Hz instead of the normal 0–4000 Hz range where human speech lives. This told me the signal had been AM modulated , basically someone took the original audio and artificially shifted it up to 7300 Hz during the corruption process.
+To fix this, I multiplied the corrupted signal by a cosine wave at the same 7300 Hz frequency. Think of it like using the same key that locked something to now unlock it  multiplying by the same frequency that shifted the audio up is what brings it back down.
+However, this multiplication has a side effect. Along with pulling the audio back down to the right place, it also creates an unwanted ghost copy of the signal up at 14600 Hz. So now I had my real audio sitting correctly at 0–4000 Hz, but with this extra junk copy floating above it.
+To get rid of that ghost copy, I applied a low pass filter  which works exactly like its name suggests, it only lets low frequencies pass through and blocks everything above a certain point. I set that cutoff point at 4000 Hz, so the filter kept all the real audio and threw away everything above it including the ghost copy. The butter and filtfilt functions from SciPy are what actually built and applied that filter to the signal.
 
 ```cpp
 #graph 2 fft
@@ -102,13 +111,13 @@ def lowpass(signal, cutoff, fs):
 stage2 = lowpass(demodulated, 4000, sample_rate)
 magnitude2 = np.abs(np.fft.rfft(stage2))
 ```
-## What is stage 2?
 
-When I plotted the FFT in Stage 1, I could see that all the audio energy was sitting around 7300 Hz instead of the normal 0–4000 Hz range where human speech lives. This told me the signal had been AM modulated , basically someone took the original audio and artificially shifted it up to 7300 Hz during the corruption process.
-To fix this, I multiplied the corrupted signal by a cosine wave at the same 7300 Hz frequency. Think of it like using the same key that locked something to now unlock it  multiplying by the same frequency that shifted the audio up is what brings it back down.
-However, this multiplication has a side effect. Along with pulling the audio back down to the right place, it also creates an unwanted ghost copy of the signal up at 14600 Hz. So now I had my real audio sitting correctly at 0–4000 Hz, but with this extra junk copy floating above it.
-To get rid of that ghost copy, I applied a low pass filter  which works exactly like its name suggests, it only lets low frequencies pass through and blocks everything above a certain point. I set that cutoff point at 4000 Hz, so the filter kept all the real audio and threw away everything above it including the ghost copy. The butter and filtfilt functions from SciPy are what actually built and applied that filter to the signal.
 
+
+## What is stage 3?
+
+After demodulation, I ran the FFT again on the recovered signal to check if it looked clean. The frequency plot was mostly smooth, but three suspicious sharp spikes stood out clearly at around 1200 Hz, 2200 Hz and 4100 Hz. Natural audio never produces spikes that narrow and precise  real sounds spread their energy across a range of frequencies. Spikes that sharp can only mean one thing  artificial tones were deliberately injected into the signal during corruption.
+To remove them, I used a notch filter — a filter that is designed to surgically target one specific frequency and cut it out, while leaving everything around it completely untouched. Unlike a low pass filter which removes a whole range, a notch filter is very precise. I applied one notch filter for each of the three spikes, removing all three interference tones and leaving the actual audio clean underneath.
 ```cpp
 ##stage 3
 plt.plot(freqs, magnitude2)
@@ -150,11 +159,12 @@ plt.savefig("plots/stage3_.png")
 plt.show()
 ```
 
-## What is stage 3?
 
-After demodulation, I ran the FFT again on the recovered signal to check if it looked clean. The frequency plot was mostly smooth, but three suspicious sharp spikes stood out clearly at around 1200 Hz, 2200 Hz and 4100 Hz. Natural audio never produces spikes that narrow and precise  real sounds spread their energy across a range of frequencies. Spikes that sharp can only mean one thing  artificial tones were deliberately injected into the signal during corruption.
-To remove them, I used a notch filter — a filter that is designed to surgically target one specific frequency and cut it out, while leaving everything around it completely untouched. Unlike a low pass filter which removes a whole range, a notch filter is very precise. I applied one notch filter for each of the three spikes, removing all three interference tones and leaving the actual audio clean underneath.
 
+## What is stage 4?
+
+After Stage 3 the audio was largely clean, but something still felt slightly off. Running the FFT revealed a spike sitting at exactly 0 Hz  this is called a DC offset. It basically means the entire waveform was shifted slightly above or below the zero line instead of being perfectly centred. This kind of shift is a common leftover side effect from the demodulation step in Stage 2 and doesn't show up as a sound you can hear clearly, but it affects how the audio sits and can cause problems when playing it back on different devices.
+The fix was straightforward. I subtracted the mean value of the entire signal from every sample , this effectively dragged the waveform back to being centred at zero, removing the DC offset completely. After that I normalised the signal, which means I scaled all the amplitude values to sit neatly between -1 and 1. This ensures the audio is at a consistent, standard volume level without any clipping or distortion. After both corrections the signal was finally clean, centred and ready to be saved as the recovered audio file.
 ```cpp
 ##stage 4
 plt.plot(t, stage3)
@@ -180,11 +190,5 @@ plt.show()
 wavfile.write("recovered.wav", sample_rate, recovered)
 print("Saved recovered.wav!")
 ```
-
-## What is stage 4?
-
-After Stage 3 the audio was largely clean, but something still felt slightly off. Running the FFT revealed a spike sitting at exactly 0 Hz  this is called a DC offset. It basically means the entire waveform was shifted slightly above or below the zero line instead of being perfectly centred. This kind of shift is a common leftover side effect from the demodulation step in Stage 2 and doesn't show up as a sound you can hear clearly, but it affects how the audio sits and can cause problems when playing it back on different devices.
-The fix was straightforward. I subtracted the mean value of the entire signal from every sample , this effectively dragged the waveform back to being centred at zero, removing the DC offset completely. After that I normalised the signal, which means I scaled all the amplitude values to sit neatly between -1 and 1. This ensures the audio is at a consistent, standard volume level without any clipping or distortion. After both corrections the signal was finally clean, centred and ready to be saved as the recovered audio file.
-
 
 
