@@ -15,3 +15,7 @@ deck on any ONE of the below topics as if they were being taught to your juniors
 ## ANSWER 4
 
 What stuck with me most from XLR8's hardware and software session wasn't just the content, but the way it was delivered — memes, simple language, and a conversational energy that made a complex technical session feel like a chat between friends rather than a lecture. I wanted to recreate exactly that feeling with this slide deck, taking something that sounds intimidatingly niche like active noise cancellation and breaking it down in a way that makes a junior go "oh, that's actually really cool."
+
+https://canva.link/86is9z05vb0fuf5
+
+link to presentation 
