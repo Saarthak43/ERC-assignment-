@@ -1,4 +1,3 @@
-
 import numpy as np ## calculation of FFT
 import matplotlib.pyplot as plt ## plotting of graphs 
 from scipy.io import wavfile ## scipy library to read and write wav files
