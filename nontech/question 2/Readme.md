@@ -7,5 +7,6 @@ Design a poster for a workshop on Introduction to Swarm Robotics.
 
 ## ANSWER 2
 
-<img width="1587" height="2245" alt="Purple Blue Modern Illustration School Event Poster (1)" src="https://github.com/user-attachments/assets/3bed0998-4acc-4cb7-852e-fe86d6e637ac" />
+<img width="1587" height="2245" alt="poster swarm robotics" src="https://github.com/user-attachments/assets/e1c63bce-1bcf-4e0a-a4c7-8a7c555694b0" />
+
 
